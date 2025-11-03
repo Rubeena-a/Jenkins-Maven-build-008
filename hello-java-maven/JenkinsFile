@@ -1,0 +1,16 @@
+pipeline {
+  agent any
+  tools { maven 'maven3' } // name of the Maven installation in Global Tool Config
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+    stage('Build') {
+      steps {
+        dir('hello-java-maven') {   // change if your pom is in another folder
+          sh 'mvn clean package'
+        }
+      }
+    }
+  }
+}
